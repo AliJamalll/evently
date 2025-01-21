@@ -11,10 +11,10 @@ import '../../../core/widgets/custom_flags.dart';
 import '../../../core/widgets/custom_outlined_button.dart';
 import '../../../core/widgets/custom_text_field.dart';
 
-class LoginScreen extends StatelessWidget {
+class SignupScreen extends StatelessWidget {
   var formkey = GlobalKey<FormState>();
 
-  LoginScreen({super.key});
+  SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,21 @@ class LoginScreen extends StatelessWidget {
                   height: 188,
                 ),
                 SizedBox(
-                  height: 24.h,
+                  height: 24,
+                ),
+                CustomTextField(
+                  borderColor: AppColors.grey,
+                  hint: 'Name',
+                  PrifixIcon: Icon(Icons.person),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'this field can\'t be empty';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(
+                  height: 16,
                 ),
                 CustomTextField(
                   borderColor: AppColors.grey,
@@ -50,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                   },
                 ),
                 SizedBox(
-                  height: 16.h,
+                  height: 16,
                 ),
                 CustomTextField(
                   borderColor: AppColors.grey,
@@ -64,24 +78,23 @@ class LoginScreen extends StatelessWidget {
                     return null;
                   },
                 ),
-                Row(
-                  children: [
-                    Spacer(),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(Routes.forgetPassword);
-                      },
-                      child: Text(
-                        "Forget Password?",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16,
-                            color: AppColors.purple,
-                            decoration: TextDecoration.underline,
-                            decorationColor: AppColors.purple),
-                      ),
-                    )
-                  ],
+                SizedBox(
+                  height: 16,
+                ),
+                CustomTextField(
+                  borderColor: AppColors.grey,
+                  hint: 'Password',
+                  isPassword: true,
+                  PrifixIcon: Icon(Icons.password),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'this field can\'t be empty';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(
+                  height: 24.h,
                 ),
                 CustomButton(
                   onPressed: (){
@@ -92,7 +105,7 @@ class LoginScreen extends StatelessWidget {
                       ShowSnackBar("empty fields", context);
                     }
                   },
-                  text: "Login",
+                  text: "Create Account",
                   buttonColor: AppColors.purple,
                 ),
                 SizedBox(
@@ -102,32 +115,28 @@ class LoginScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Don’t Have Account ?",
+                      "Already Have Account ?",
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 16,
                           color: Colors.black),
                     ),
+
                     TextButton(
-                      onPressed: (){
-                        Navigator.pushNamed(context, Routes.signup);
-                      },
-                      child:Text(
-                      "Create Account",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: AppColors.purple,
-                          decoration: TextDecoration.underline,
-                          decorationColor: AppColors.purple),
-                    )
+                        onPressed: (){
+                          Navigator.pushNamed(context, Routes.signin);
+                        },
+                        child:Text(
+                          "Login",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              color: AppColors.purple,
+                              decoration: TextDecoration.underline,
+                              decorationColor: AppColors.purple),
+                        )
                     )
                   ],
-                ),
-                CustomDivider(),
-                CustomFilledButton(
-                  image: appAssets.googleLogo,
-                  text: "Login With Google",
                 ),
                 SizedBox(
                   height: 24.h,
