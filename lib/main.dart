@@ -5,7 +5,6 @@ import 'evently_app.dart';
 import 'firebase_options.dart';
 
 void main() async{
-
   runApp( EventlyApp(appRouter: AppRouter(),));
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
