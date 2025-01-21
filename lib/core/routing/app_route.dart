@@ -3,7 +3,7 @@ import 'package:evently/features/splash/ui/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-abstract class AppRouter{
+ class AppRouter{
   static Route<dynamic> onGenerateRoute(RouteSettings settings){
 
     switch(settings.name){
