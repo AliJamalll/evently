@@ -1,8 +1,10 @@
 import 'package:evently/core/routing/page_route_name.dart';
 import 'package:evently/features/Home/ui/home_screen.dart';
 import 'package:evently/features/forget_password/ui/forget_password_screen.dart';
+import 'package:evently/features/layout_view.dart';
 import 'package:evently/features/login/ui/login_screen.dart';
 import 'package:evently/features/onboarding/ui/onboarding_screen.dart';
+import 'package:evently/features/onboarding/ui/on_boarding_widegts.dart';
 import 'package:evently/features/signup/ui/signup_screen.dart';
 import 'package:evently/features/splash/ui/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,6 +21,11 @@ import 'package:flutter/material.dart';
       }
       case Routes.onBoarding:{
         return MaterialPageRoute(builder: (context) =>  OnboardingScreen(),
+            settings: settings
+        );
+      }
+      case Routes.onBoardingWidgets:{
+        return MaterialPageRoute(builder: (context) =>  OnBoardingWidgets(),
             settings: settings
         );
       }
@@ -39,6 +46,11 @@ import 'package:flutter/material.dart';
       }
       case Routes.forgetPassword:{
         return MaterialPageRoute(builder: (context) =>  ForgetPasswordScreen(),
+            settings: settings
+        );
+      }
+      case Routes.layOutView:{
+        return MaterialPageRoute(builder: (context) =>  LayoutView(),
             settings: settings
         );
       }

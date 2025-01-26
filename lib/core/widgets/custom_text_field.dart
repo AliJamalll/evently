@@ -8,7 +8,8 @@ class CustomTextField extends StatefulWidget {
       required this.validator,
       this.PrifixIcon,
       this.SuffixIcon,
-        this.isPassword= false
+        this.isPassword= false,
+        this.controller
       });
 
 
@@ -17,6 +18,7 @@ class CustomTextField extends StatefulWidget {
   String hint;
   Color borderColor;
   bool isPassword ;
+  TextEditingController? controller ;
   final String? Function(String?)? validator;
 
   @override
@@ -24,28 +26,21 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  TextEditingController controller = TextEditingController();
+
   late bool isPasswordVisible;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    controller = TextEditingController();
     isPasswordVisible = !widget.isPassword;
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    controller.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
+      controller: widget.controller,
       validator: widget.validator,
       obscureText: widget.isPassword && !isPasswordVisible,
       decoration: InputDecoration(

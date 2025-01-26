@@ -4,17 +4,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../constants/app_assets.dart';
 import '../theme/app_colors.dart';
 
-class SwappableImagesContainer extends StatefulWidget {
-  const SwappableImagesContainer({super.key});
+class SwappableThemeContainer extends StatefulWidget {
+  const SwappableThemeContainer({super.key});
 
   @override
   _SwappableImagesContainerState createState() =>
       _SwappableImagesContainerState();
 }
 
-class _SwappableImagesContainerState extends State<SwappableImagesContainer> {
-  String leftImage = appAssets.usa;
-  String rightImage = appAssets.egypt;
+class _SwappableImagesContainerState extends State<SwappableThemeContainer> {
+  String leftImage = appAssets.moon;
+  String rightImage = appAssets.sun;
 
   void swapImages() {
     setState(() {
@@ -41,6 +41,7 @@ class _SwappableImagesContainerState extends State<SwappableImagesContainer> {
               onTap: swapImages,
               child: Image(
                 image: AssetImage(leftImage),
+                color: AppColors.purple,
               ),
             ),
             SizedBox(width: 10.w),
@@ -48,7 +49,7 @@ class _SwappableImagesContainerState extends State<SwappableImagesContainer> {
               onTap: swapImages,
               child: Image(
                 image: AssetImage(rightImage),
-
+                color: AppColors.purple,
               ),
             ),
           ],

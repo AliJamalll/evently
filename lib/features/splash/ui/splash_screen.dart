@@ -19,12 +19,13 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Timer(const Duration(seconds: 5), () {
-      Navigator.pushNamed(context, Routes.signin);
+      Navigator.pushNamed(context, Routes.onBoarding);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
       body: Center(
         child: Column(
@@ -34,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 350.h,
             ),
             SizedBox(
-              height: 186.h,
+              height: mediaQuery.height * 0.25.h,
               width: 136.w,
               child: Image(image: AssetImage(appAssets.splashImage)),
             ),

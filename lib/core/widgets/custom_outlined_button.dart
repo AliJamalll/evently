@@ -5,18 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomFilledButton extends StatelessWidget {
-  CustomFilledButton({super.key,required this.text,this.buttonColor,this.image});
+  CustomFilledButton({super.key,required this.text,this.buttonColor,this.image,required this.onPressed});
 
   String text;
   Color? buttonColor;
   String? image;
+  VoidCallback onPressed;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 50.h,
       width: double.infinity,
       child: ElevatedButton(
-          onPressed: (){},
+          onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.white,
               foregroundColor: AppColors.purple,
