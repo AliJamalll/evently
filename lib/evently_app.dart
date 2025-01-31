@@ -1,4 +1,7 @@
+import 'package:bot_toast/bot_toast.dart';
+import 'package:evently/core/theme/app_theme_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/routing/app_route.dart';
@@ -16,11 +19,13 @@ class EventlyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Evently',
-        theme: ThemeData(),
-        // theme: appThemeManager.lightTheme, // Ensure `appThemeManager` is initialized properly
-        // darkTheme: appThemeManager.darkTheme,
+        theme: appThemeManager.lightThemeData,
+        darkTheme: appThemeManager.darkThemeData,
         themeMode: ThemeMode.light,
         onGenerateRoute: AppRouter.onGenerateRoute,
+        builder: EasyLoading.init(
+          builder: BotToastInit()
+        ),
         initialRoute: Routes.initial,
       )
     );

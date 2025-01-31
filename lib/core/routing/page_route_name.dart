@@ -5,5 +5,8 @@ abstract class Routes{
   static const String signup = '/sign_up_view';
   static const String home = '/home';
   static const String forgetPassword = '/forget_password';
+  static const String layOutView = '/layout-view';
+  static const String onBoardingWidgets = '/on_boarding_widgets';
+  static const String addEvent = '/add_event';
 
 }

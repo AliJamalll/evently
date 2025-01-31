@@ -21,8 +21,8 @@ class CustomDivider extends StatelessWidget {
           Text(
             "or",
             style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
               color: AppColors.purple,
             ),
           ),

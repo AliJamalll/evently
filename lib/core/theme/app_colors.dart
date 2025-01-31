@@ -7,4 +7,7 @@ class AppColors{
 
   static const Color darkPurple = Color(0xff101127);
 
+  static const Color white = Colors.white;
+
+
 }
