@@ -96,7 +96,7 @@ class OnboardingScreen extends StatelessWidget {
               CustomButton(
                 text: "Let’s Start",
                 onPressed: () {
-                  Navigator.pushNamed(context, Routes.onBoardingWidgets);
+                  Navigator.pushNamed(context, Routes.layOutView);
                 },
                 buttonColor: AppColors.purple,
               )

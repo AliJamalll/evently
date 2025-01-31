@@ -4,8 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:location/location.dart';
 
 abstract class FirebaseServices {
+
+
+
   static Future<bool> signUp(String email, String password,BuildContext context) async {
     EasyLoading.show();
     try{
@@ -61,4 +65,6 @@ abstract class FirebaseServices {
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
+
+
 }

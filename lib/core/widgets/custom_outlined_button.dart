@@ -5,12 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomFilledButton extends StatelessWidget {
-  CustomFilledButton({super.key,required this.text,this.buttonColor,this.image,required this.onPressed});
+  CustomFilledButton({super.key,required this.text,this.buttonColor,this.image,required this.onPressed,this.priffexIcon,this.suffixIcon});
 
   String text;
   Color? buttonColor;
   String? image;
   VoidCallback onPressed;
+  IconData? priffexIcon;
+  IconData? suffixIcon;
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +43,16 @@ class CustomFilledButton extends StatelessWidget {
                 ),
                 const SizedBox(width: 10), // Space between image and text
               ],
+              Icon(priffexIcon,size: 25,color: AppColors.purple,),
+              SizedBox(width: 10,),
               Text(text,
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500
                 ),
-              )
+              ),
+              Spacer(),
+              Icon(suffixIcon,size: 25,color: AppColors.purple,),
             ],
           )
       ),

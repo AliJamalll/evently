@@ -5,7 +5,7 @@ class CustomTextField extends StatefulWidget {
       {required this.borderColor,
       super.key,
       required this.hint,
-      required this.validator,
+       this.validator,
       this.PrifixIcon,
       this.SuffixIcon,
         this.isPassword= false,

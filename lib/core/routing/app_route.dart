@@ -1,5 +1,6 @@
 import 'package:evently/core/routing/page_route_name.dart';
 import 'package:evently/features/Home/ui/home_screen.dart';
+import 'package:evently/features/create_new_event/ui/create_new_event_screen.dart';
 import 'package:evently/features/forget_password/ui/forget_password_screen.dart';
 import 'package:evently/features/layout_view.dart';
 import 'package:evently/features/login/ui/login_screen.dart';
@@ -51,6 +52,11 @@ import 'package:flutter/material.dart';
       }
       case Routes.layOutView:{
         return MaterialPageRoute(builder: (context) =>  LayoutView(),
+            settings: settings
+        );
+      }
+      case Routes.addEvent:{
+        return MaterialPageRoute(builder: (context) =>  CreateNewEventScreen(),
             settings: settings
         );
       }
