@@ -1,7 +1,7 @@
 class EventDataModel {
 
   static const String collectionName = "EventDataModel";
-  final String eventId;
+   String? eventId;
   final String eventTitle;
   final String eventImage;
   final String eventDescription;
@@ -9,7 +9,8 @@ class EventDataModel {
   final DateTime eventDate;
   bool isFavorite;
 
-  EventDataModel({required this.eventId,
+  EventDataModel({
+     this.eventId,
     required this.eventTitle,
     required this.eventImage,
     required this.eventDescription,

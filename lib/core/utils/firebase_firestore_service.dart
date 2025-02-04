@@ -1,24 +1,58 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently/models/event_data_model.dart';
 
-abstract class FirebaseFireStoreService{
+abstract class FirebaseFireStoreService {
 
-  static collectionRef<EventDataModel>(){
-
+  ///[Function] to get collection reference
+  static CollectionReference<EventDataModel> getCollectionReference() {
+    return FirebaseFirestore.instance.collection(EventDataModel.collectionName)
+        .withConverter<EventDataModel>(
+        fromFirestore: (snapshot,_) => EventDataModel.fromFirestore(snapshot.data()!),
+        toFirestore: (data,_) => data.toFireStore()
+    );
   }
 
-  static createNewEvent(EventDataModel data)async{
-    var collectionRef = FirebaseFirestore.instance.collection(EventDataModel.collectionName);
-     collectionRef.();
-    var docRef = collectionRef.doc();
-    docRef.set(data);
-    return Future.value(true)
+  static Future<bool> createNewEvent(EventDataModel data) async {
+    try{
+      var collectionRef = getCollectionReference();
+      var docRef = collectionRef.doc();
+      data.eventId = docRef.id;
+      docRef.set(data);
+      return Future.value(true);
+    }catch(e){
+      return Future.value(false);
+    }
   }
-  static getDataFromFireStore(){
-    var collectionRef = FirebaseFirestore.instance.collection();
 
-}
-static deleteEvent(){
+  // static Future<List<EventDataModel>> getDataFromFireStore() async{
+  //   var collectionRef = getCollectionReference();
+  //   QuerySnapshot<EventDataModel> data  = await collectionRef.get();
+  //   List<EventDataModel> eventDataList = data.docs.map((element){
+  //     return element.data();
+  //   }).toList();
+  //   return eventDataList;
+  // }
 
-}
+  static Stream<QuerySnapshot<EventDataModel>> getStreamDataFromFireStore(String eventCategory){
+    var collectionRef = getCollectionReference().where("eventCategory",isEqualTo: eventCategory);
+    return collectionRef.snapshots();
+  }
+
+  static Stream<QuerySnapshot<EventDataModel>> getStreamFavoriteDataFromFireStore(){
+    var collectionRef = getCollectionReference().where("isFavorite",isEqualTo: true);
+    return collectionRef.snapshots();
+  }
+
+  static Future<void> updateEvent(EventDataModel eventData) async {
+    var collectionRef = getCollectionReference();
+    var docRef = collectionRef.doc(eventData.eventId);
+    return docRef.update(eventData.toFireStore());
+  }
+
+
+  static deleteEvent(EventDataModel eventData) async{
+    var collectionRef = getCollectionReference();
+    var docRef = await collectionRef.doc(eventData.eventId);
+    return docRef.delete();
+  }
 }

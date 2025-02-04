@@ -66,5 +66,9 @@ abstract class FirebaseServices {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
+  static Future<void> signOut()async{
+    final FirebaseAuth _auth = FirebaseAuth.instance;
 
+    await _auth.signOut();
+  }
 }

@@ -7,7 +7,22 @@ abstract class appThemeManager{
   );
 
   static ThemeData darkThemeData = ThemeData(
-      scaffoldBackgroundColor: AppColors.darkPurple
+      scaffoldBackgroundColor: AppColors.darkPurple,
+
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColors.darkPurple,
+      type: BottomNavigationBarType.fixed,
+      selectedLabelStyle: TextStyle(
+          fontSize: 12, fontWeight: FontWeight.bold),
+      selectedIconTheme: const IconThemeData(
+        color: Colors.white,
+      ),
+      unselectedIconTheme: const IconThemeData(
+        color: Colors.white,
+      ),
+      selectedItemColor: AppColors.white,
+      unselectedItemColor: AppColors.white,
+    )
   );
 
 }
