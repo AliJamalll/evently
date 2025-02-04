@@ -1,11 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently/core/constants/app_assets.dart';
 import 'package:evently/core/theme/app_colors.dart';
+import 'package:evently/core/utils/firebase_firestore_service.dart';
 import 'package:evently/core/widgets/custom_filed_button.dart';
+import 'package:evently/core/widgets/custom_snack_bar.dart';
 import 'package:evently/core/widgets/custom_text_field.dart';
 import 'package:evently/features/create_new_event/ui/widgets/tap_item.dart';
 import 'package:evently/models/event_category_model.dart';
+import 'package:evently/models/event_data_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/widgets/custom_outlined_button.dart';
 
@@ -22,6 +28,8 @@ class _CreateNewEventScreenState extends State<CreateNewEventScreen> {
   final TextEditingController _descController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
+
+  DateTime? selectedDate;
 
   int selectedTap = 0;
   List<eventCategoryModel> eventCatyModel = <eventCategoryModel>[
@@ -48,7 +56,7 @@ class _CreateNewEventScreenState extends State<CreateNewEventScreen> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: AppColors.purple),
-        backgroundColor: AppColors.white,
+        backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text(
           "Create Event",
@@ -78,13 +86,14 @@ class _CreateNewEventScreenState extends State<CreateNewEventScreen> {
                           fit: BoxFit.cover)),
                 ),
                 SizedBox(
-                  height: 16.h,
+                  height: 12.h,
                 ),
                 DefaultTabController(
                     length: eventCatyModel.length,
                     child: TabBar(
                         isScrollable: true,
-                        indicator: BoxDecoration(),
+                        indicator: BoxDecoration(
+                        ),
                         tabAlignment: TabAlignment.start,
                         indicatorPadding: EdgeInsets.zero,
                         labelPadding: EdgeInsets.symmetric(horizontal: 6),
@@ -122,6 +131,12 @@ class _CreateNewEventScreenState extends State<CreateNewEventScreen> {
                   borderColor: AppColors.grey,
                   hint: "Event Title",
                   PrifixIcon: Icon(Icons.menu_book),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'this field can\'t be empty';
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(
                   height: 16.h,
@@ -143,6 +158,12 @@ class _CreateNewEventScreenState extends State<CreateNewEventScreen> {
                   borderColor: AppColors.grey,
                   hint: "Event Description",
                   PrifixIcon: Icon(Icons.menu_book),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'this field can\'t be empty';
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(
                   height: 16.h,
@@ -161,7 +182,8 @@ class _CreateNewEventScreenState extends State<CreateNewEventScreen> {
                     TextButton(onPressed: () {
                       choseEventDate();
                     },
-                        child: Text("Choose Date",
+                        child: Text(
+                          selectedDate == null ? "Choose Date" : DateFormat("dd MMM yyy").format(selectedDate!),
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 16,
@@ -220,7 +242,31 @@ class _CreateNewEventScreenState extends State<CreateNewEventScreen> {
                 ),
                 CustomButton(
                   text: "Add Event",
-                  onPressed: () {},
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      if (selectedDate != null) {
+                        var data = EventDataModel(
+                          eventTitle: _titleController.text,
+                          eventImage:  eventCatyModel[selectedTap].eventCatImg,
+                          eventDescription: _descController.text,
+                          eventCategory: eventCatyModel[selectedTap].eventCatName,
+                          eventDate: selectedDate!,
+                        );
+                        EasyLoading.show();
+                        FirebaseFireStoreService.createNewEvent(data).then(
+                            (value){
+                              EasyLoading.dismiss();
+                              if(value){
+                               ShowSnackBar("event created successfully", context);
+                                Navigator.pop(context);
+                              }else{
+                                ShowSnackBar("select date first", context);
+                              }
+                            }
+                        );
+                      }
+                    }
+                  },
                   buttonColor: AppColors.purple,
                 )
               ],
@@ -231,10 +277,15 @@ class _CreateNewEventScreenState extends State<CreateNewEventScreen> {
     );
   }
 
-  void choseEventDate() async{
-   DateTime? currentDate = await showDatePicker(context: context,
+  void choseEventDate() async {
+    DateTime? currentDate = await showDatePicker(context: context,
         firstDate: DateTime.now(),
         lastDate: DateTime.now()
-            .add(Duration(days: 365)));
+            .add(Duration(days: 365)
+        )
+    );
+    setState(() {
+    selectedDate = currentDate;
+    });
   }
 }

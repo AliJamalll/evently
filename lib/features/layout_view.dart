@@ -6,7 +6,7 @@ import 'package:evently/features/map_page/ui/map_screen.dart';
 import 'package:evently/features/profile_page/ui/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../core/routing/page_route_name.dart';
 
 class LayoutView extends StatefulWidget {
@@ -55,7 +55,7 @@ class _LayoutViewState extends State<LayoutView> {
           backgroundColor: AppColors.purple,
           type: BottomNavigationBarType.fixed,
           selectedLabelStyle: TextStyle(
-              fontSize: 12, fontFamily: 'janna', fontWeight: FontWeight.bold),
+              fontSize: 12, fontWeight: FontWeight.bold),
           selectedIconTheme: const IconThemeData(
             color: Colors.white,
           ),
@@ -87,7 +87,7 @@ class _LayoutViewState extends State<LayoutView> {
                       ),
                       color: Colors.white,
                     ),
-              label: "Home",
+              label: AppLocalizations.of(context)!.home,
             ),
             BottomNavigationBarItem(
                 icon: selectedIndex == 1
@@ -100,7 +100,7 @@ class _LayoutViewState extends State<LayoutView> {
                         ),
                         color: Colors.white,
                       ),
-                label: "Map"),
+                label:  AppLocalizations.of(context)!.map),
             BottomNavigationBarItem(
                 icon: selectedIndex == 2
                     ? ImageIcon(
@@ -112,7 +112,7 @@ class _LayoutViewState extends State<LayoutView> {
                         ),
                         color: Colors.white,
                       ),
-                label: "Love"),
+                label:  AppLocalizations.of(context)!.favorite),
             BottomNavigationBarItem(
                 icon: selectedIndex == 3
                     ? ImageIcon(
@@ -124,7 +124,7 @@ class _LayoutViewState extends State<LayoutView> {
                         ),
                         color: Colors.white,
                       ),
-                label: "Profile")
+                label:  AppLocalizations.of(context)!.profile)
           ]),
     );
   }
