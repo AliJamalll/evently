@@ -18,9 +18,6 @@ class LayoutView extends StatefulWidget {
 
 class _LayoutViewState extends State<LayoutView> {
 
-  Location location = new Location();
-
-
   List<Widget> screens = [
     HomeScreen(),
     MapScreen(),
@@ -128,12 +125,4 @@ class _LayoutViewState extends State<LayoutView> {
           ]),
     );
   }
-
-  // Future<void> getLocation()async{
-  //   bool locationPermissionGranted = await _getLocationGranted();
-  //
-  //   Future<bool> _getLocationGranted()async{
-  //     var permissionState = await location.hasPermission();
-  //   }
-  // }
 }

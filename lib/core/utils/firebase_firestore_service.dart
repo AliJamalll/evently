@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently/models/event_data_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class FirebaseFireStoreService {
 
@@ -34,12 +35,14 @@ abstract class FirebaseFireStoreService {
   // }
 
   static Stream<QuerySnapshot<EventDataModel>> getStreamDataFromFireStore(String eventCategory){
-    var collectionRef = getCollectionReference().where("eventCategory",isEqualTo: eventCategory);
+    var collectionRef = getCollectionReference().where("eventCategory",isEqualTo: eventCategory)
+    .where("userId" ,isEqualTo: FirebaseAuth.instance.currentUser?.uid);
     return collectionRef.snapshots();
   }
 
   static Stream<QuerySnapshot<EventDataModel>> getStreamFavoriteDataFromFireStore(){
-    var collectionRef = getCollectionReference().where("isFavorite",isEqualTo: true);
+    var collectionRef = getCollectionReference().where("isFavorite",isEqualTo: true)
+        .where("userId" ,isEqualTo: FirebaseAuth.instance.currentUser?.uid);
     return collectionRef.snapshots();
   }
 
@@ -55,4 +58,5 @@ abstract class FirebaseFireStoreService {
     var docRef = await collectionRef.doc(eventData.eventId);
     return docRef.delete();
   }
+
 }

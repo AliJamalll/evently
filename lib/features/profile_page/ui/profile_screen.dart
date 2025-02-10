@@ -1,11 +1,9 @@
 import 'dart:developer';
-
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:evently/core/constants/app_assets.dart';
 import 'package:evently/core/theme/app_colors.dart';
 import 'package:evently/core/utils/firabase_services.dart';
 import 'package:evently/core/widgets/custom_filed_button.dart';
-import 'package:evently/core/widgets/custom_outlined_button.dart';
 import 'package:evently/features/settings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

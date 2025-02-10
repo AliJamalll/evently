@@ -12,13 +12,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
+import '../../../core/routing/page_route_name.dart';
 import '../../../core/widgets/custom_outlined_button.dart';
+import '../../settings_provider.dart';
 
 class CreateNewEventScreen extends StatefulWidget {
-  const CreateNewEventScreen({super.key});
+   CreateNewEventScreen({super.key,this.eventDataModel});
+    EventDataModel? eventDataModel;
 
-  @override
+
+@override
   State<CreateNewEventScreen> createState() => _CreateNewEventScreenState();
 }
 
@@ -26,7 +31,6 @@ class _CreateNewEventScreenState extends State<CreateNewEventScreen> {
 
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descController = TextEditingController();
-
   final formKey = GlobalKey<FormState>();
 
   DateTime? selectedDate;
@@ -51,8 +55,19 @@ class _CreateNewEventScreenState extends State<CreateNewEventScreen> {
         eventCatIcon: Icons.fastfood),
   ];
 
+  late settingsProvider provider;
+
+
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    provider = Provider.of(context, listen: false);
+
+  }
+
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of(context);
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: AppColors.purple),
@@ -235,8 +250,10 @@ class _CreateNewEventScreenState extends State<CreateNewEventScreen> {
                 CustomFilledButton(
                   priffexIcon: Icons.my_location,
                   suffixIcon: Icons.arrow_forward_ios,
-                  text: 'Choose Event Location',
-                  onPressed: () {},),
+                  text: provider.eventLocation == null ?'Choose Event Location' : "Location ${provider.eventLocation!.latitude} : ${provider.eventLocation!.longitude}",
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.pickNewEvent);
+                  },),
                 SizedBox(
                   height: 16.h,
                 ),

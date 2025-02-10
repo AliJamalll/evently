@@ -66,9 +66,18 @@ abstract class FirebaseServices {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
+  static Future<void> resetPassword(String email)async{
+    try{
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    }catch(e){
+      print(e.toString());
+    }
+  }
+
   static Future<void> signOut()async{
     final FirebaseAuth _auth = FirebaseAuth.instance;
 
     await _auth.signOut();
+    await GoogleSignIn().signOut();
   }
 }
