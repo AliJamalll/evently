@@ -46,6 +46,8 @@ class CustomFilledButton extends StatelessWidget {
               Icon(priffexIcon,size: 25,color: AppColors.purple,),
               SizedBox(width: 10,),
               Text(text,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500

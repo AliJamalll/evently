@@ -8,5 +8,7 @@ abstract class Routes{
   static const String layOutView = '/layout-view';
   static const String onBoardingWidgets = '/on_boarding_widgets';
   static const String addEvent = '/add_event';
+  static const String pickNewEvent = '/pick_event';
+  static const String eventDetails = '/eventDetails';
 
 }
